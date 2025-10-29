@@ -88,7 +88,6 @@ public class StudentPanel extends JFrame {
         boolean success = DatabaseHelper.submitVote(activePoll.getId(), selectedOption);
 
         if (success) {
-            // Fulfill "vote once per poll" by disabling UI after voting
             JOptionPane.showMessageDialog(this, "Vote recorded! Thank you.");
             submitButton.setEnabled(false);
             opt1.setEnabled(false);
@@ -99,4 +98,5 @@ public class StudentPanel extends JFrame {
             JOptionPane.showMessageDialog(this, "Error submitting vote.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 }
