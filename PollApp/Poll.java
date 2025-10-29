@@ -44,11 +44,11 @@ public class Poll {
     }
 
     // This is used to display the poll nicely in the JList
-    @Override
     public String toString() {
         return String.format("ID: %d - %s [%s]",
                 id,
                 question.length() > 50 ? question.substring(0, 50) + "..." : question,
                 isActive ? "ACTIVE" : "INACTIVE");
     }
+
 }
