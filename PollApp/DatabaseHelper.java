@@ -11,7 +11,6 @@ public class DatabaseHelper {
         return "jdbc:sqlite:poll_app.db";
     }
 
-    // Call this once at the start of the app
     public static void initializeDatabase() {
         String createPollsTable = "CREATE TABLE IF NOT EXISTS polls ("
                 + " id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -20,13 +19,13 @@ public class DatabaseHelper {
                 + " option2 TEXT NOT NULL,"
                 + " option3 TEXT NOT NULL,"
                 + " option4 TEXT NOT NULL,"
-                + " isActive INTEGER DEFAULT 0" // 0 = false, 1 = true
+                + " isActive INTEGER DEFAULT 0"
                 + ");";
 
         String createVotesTable = "CREATE TABLE IF NOT EXISTS votes ("
                 + " id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + " poll_id INTEGER NOT NULL,"
-                + " selected_option INTEGER NOT NULL," // 1 for opt1, 2 for opt2, etc.
+                + " selected_option INTEGER NOT NULL,"
                 + " FOREIGN KEY (poll_id) REFERENCES polls(id)"
                 + ");";
 
@@ -89,7 +88,6 @@ public class DatabaseHelper {
         String activateSql = "UPDATE polls SET isActive = 1 WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(getURL())) {
-            // Use transaction for safety
             conn.setAutoCommit(false);
 
             try (Statement stmt = conn.createStatement();
@@ -200,4 +198,5 @@ public class DatabaseHelper {
         }
         return counts;
     }
+
 }
